@@ -1,0 +1,30 @@
+require_relative '../../../app/ledger'
+require_relative '../../../config/sequel'
+require_relative '../../support/db'
+
+module ExpenseTracker
+  RSpec.describe Ledger do
+    let(:ledger) { Ledger.new }
+    let(:expense) do
+      {
+        'payee' => 'Starbucks',
+        'amount' => 5.75,
+        'date' => '2017-06-10'
+      }
+    end
+    describe 'record' do
+      context 'with a valid expense' do
+        it 'succesfully saves the expense in the DB', :aggregate_failures do
+          result = ledger.record(expense)
+
+          expect(result).to be_success
+          expect(DB[:expenses].all).to match [a_hash_including(
+            'payee' => 'Starbucks',
+            'amount' => 5.75,
+            'date' => '2017-06-10'
+          )]
+        end
+      end
+    end
+  end
+end
