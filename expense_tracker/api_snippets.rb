@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class API < Sinatra::Base
   def initialize(ledger:)
     @ledger = ledger
@@ -6,4 +8,4 @@ class API < Sinatra::Base
 end
 
 # later callers do this
-app = API.new(ledger: Ledger.new)
+API.new(ledger: Ledger.new)

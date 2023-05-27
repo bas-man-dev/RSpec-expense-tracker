@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rack/test'
 require 'json'
 require_relative '../../app/api'
@@ -31,7 +33,7 @@ module ExpenseTracker
         'amount' => 15.25,
         'date' => '2017-06-10'
       )
-      groceries = post_expense(
+      post_expense(
         'payee' => 'Whole Foods',
         'amount' => 95.20,
         'date' => '2017-06-11'
